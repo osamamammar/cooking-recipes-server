@@ -18,18 +18,29 @@ router.get("/", (req, res) => {
   res.send("Hello !");
 });
 
-// Gets requests
+// @route   GET /recipes
+// @desc    Get all recipes
+// @access  Public
 router.get("/recipes", getAllRecipes);
+// @route   GET /recipe/:id
+// @desc    Get one recipe
+// @access  Public
 router.get("/recipe/:id", getOneRecipe);
-
-// Posts requests
+// @route   POST /recipe
+// @desc    Create a recipe
+// @access  Public
 router.post("/recipes", validateCreateNewRecipe, createRecipe);
+// @route   POST /upload
+// @desc    Upload a dish image
+// @access  Public
 router.post("/upload", uploadImage);
-
-// Puts requests
+// @route   PUT /recipe/:id
+// @desc    Update a recipe
+// @access  Public
 router.put("/recipe/:id", validateUpdateRecipe, updateRecipe);
-
-// Deletes requests
+// @route   DELETE /recipe/:id
+// @desc    Delete a recipe
+// @access  Public
 router.delete("/recipe/:id", deleteRecipe);
 
 module.exports = router;
