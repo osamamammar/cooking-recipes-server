@@ -1,5 +1,5 @@
-const validateCreateNewRecipe = async (req, res, next) => {
-  const { title, ingredients } = await req.body;
+const validateRequiredSchema = (req, res, next) => {
+  const { title, ingredients } = req.body;
 
   if (!title || !ingredients) {
     return res
@@ -17,4 +17,4 @@ const validateCreateNewRecipe = async (req, res, next) => {
   next();
 };
 
-module.exports = validateCreateNewRecipe;
+module.exports = validateRequiredSchema;
