@@ -1,4 +1,4 @@
-const { getAllRecipes } = require("../controllers/Recipe");
+const { getAllRecipes, getOneRecipe } = require("../controllers/Recipe");
 
 const router = require("express").Router();
 
@@ -10,5 +10,6 @@ router.get("/", (req, res) => {
 // @desc    Get all recipes
 // @access  Public
 router.get("/recipes", getAllRecipes);
+router.get("/recipe/:id", getOneRecipe);
 
 module.exports = router;
