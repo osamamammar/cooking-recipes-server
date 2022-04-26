@@ -18,11 +18,14 @@ const getAllRecipes = async (req, res) => {
 const getOneRecipe = async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
+
     if (!recipe) {
       return res.status(404).json({ status: 404, message: "Recipe not found" });
     }
+
     res.status(200).json(recipe);
   } catch (err) {
+    console.log(err);
     res.status(400).json({ status: 400, message: err.message });
   }
 };
@@ -88,10 +91,37 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+const uploadImage = async (req, res) => {
+  try {
+    let sampleFile;
+    let uploadPath;
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send("No files were uploaded.");
+    }
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = await req.files.img;
+    uploadPath = __dirname + "/../public/images/" + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(uploadPath, function (err) {
+      if (err) return res.status(500).send(err);
+
+      res.send({
+        status: 200,
+        pictureUrl: `/images/` + sampleFile.name,
+      });
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getOneRecipe,
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  uploadImage,
 };

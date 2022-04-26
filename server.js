@@ -7,15 +7,15 @@ const connectDB = require("./database/db");
 // Create express app
 const app = express();
 
-// default options
-app.use(fileUpload());
-
 // Load env vars
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 // Database Connection
 connectDB();
+
+app.use(express.static("public"));
+app.use(fileUpload());
 
 // Middleware
 app.use(express.json());
