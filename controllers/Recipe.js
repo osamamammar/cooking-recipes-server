@@ -49,8 +49,31 @@ const createRecipe = async (req, res) => {
   }
 };
 
+// @route   PUT /recipe/:id
+// @desc    Update a recipe
+// @access  Public
+const updateRecipe = async (req, res) => {
+  try {
+    const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body);
+
+    if (!recipe)
+      return res.status(404).json({ status: 404, message: "Recipe not found" });
+
+    res.status(200).json({
+      status: 200,
+      message: "Recipe updated successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getOneRecipe,
   createRecipe,
+  updateRecipe,
 };

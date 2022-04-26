@@ -1,14 +1,10 @@
 const validateCreateNewRecipe = async (req, res, next) => {
   const { title, ingredients } = await req.body;
 
-  if (!title) {
-    return res.status(400).json({ status: 400, message: "Title is required" });
-  }
-
-  if (!ingredients) {
+  if (!title || !ingredients) {
     return res
       .status(400)
-      .json({ status: 400, message: "Ingredients is required" });
+      .json({ status: 400, message: "Title and Ingredients are required" });
   }
 
   if (typeof req.body.title !== "string") {

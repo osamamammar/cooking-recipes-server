@@ -1,2 +1,4 @@
 const validateCreateNewRecipe = require("./validations/validateCreateNewRecipe");
-module.exports = validateCreateNewRecipe;
+const validateUpdateRecipe = require("./validations/validateUpdateRecipe");
+
+module.exports = { validateCreateNewRecipe, validateUpdateRecipe };
