@@ -53,6 +53,6 @@ router.put(
 // @route   DELETE /recipe/:id
 // @desc    Delete a recipe
 // @access  Public
-router.delete("/recipe/:id",validateObjectId, deleteRecipe);
+router.delete("/recipe/:id", validateObjectId, deleteRecipe);
 
 module.exports = router;

@@ -18,7 +18,6 @@ const getAllRecipes = async (req, res) => {
 const getOneRecipe = async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
-
     if (!recipe) {
       return res.status(404).json({ status: 404, message: "Recipe not found" });
     }
@@ -26,7 +25,7 @@ const getOneRecipe = async (req, res) => {
     res.status(200).json(recipe);
   } catch (err) {
     console.log(err);
-    res.status(400).json({ status: 400, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 
@@ -88,7 +87,7 @@ const deleteRecipe = async (req, res) => {
       .status(200)
       .json({ status: 200, message: "Recipe deleted successfully" });
   } catch (err) {
-    res.status(400).json({ status: 400, message: err.message });
+    res.status(500).json({ status: 500, message: err.message });
   }
 };
 
