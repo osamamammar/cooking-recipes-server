@@ -1,5 +1,5 @@
-const validateRequiredSchema = (req, res, next) => {
-  const { title, ingredients } = req.body;
+const validateRequiredSchema = async (req, res, next) => {
+  const { title, ingredients } = await req.body;
 
   if (!title || !ingredients) {
     return res

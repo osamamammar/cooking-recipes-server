@@ -12,6 +12,7 @@ const {
 const {
   validateUpdateRecipe,
   validateRequiredSchema,
+  validateObjectId,
 } = require("../middleware");
 
 router.get("/", (req, res) => {
@@ -26,7 +27,7 @@ router.get("/recipes", getAllRecipes);
 // @route   GET /recipe/:id
 // @desc    Get one recipe
 // @access  Public
-router.get("/recipe/:id", getOneRecipe);
+router.get("/recipe/:id", validateObjectId, getOneRecipe);
 
 // @route   POST /recipe
 // @desc    Create a recipe
@@ -43,6 +44,7 @@ router.post("/upload", uploadImage);
 // @access  Public
 router.put(
   "/recipe/:id",
+  validateObjectId,
   validateRequiredSchema,
   validateUpdateRecipe,
   updateRecipe
@@ -51,6 +53,6 @@ router.put(
 // @route   DELETE /recipe/:id
 // @desc    Delete a recipe
 // @access  Public
-router.delete("/recipe/:id", deleteRecipe);
+router.delete("/recipe/:id",validateObjectId, deleteRecipe);
 
 module.exports = router;

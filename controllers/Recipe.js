@@ -80,6 +80,7 @@ const updateRecipe = async (req, res) => {
 const deleteRecipe = async (req, res) => {
   try {
     const recipe = await Recipe.findByIdAndDelete(req.params.id);
+
     if (!recipe) {
       return res.status(404).json({ status: 404, message: "Recipe not found" });
     }
