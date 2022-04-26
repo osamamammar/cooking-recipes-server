@@ -71,9 +71,27 @@ const updateRecipe = async (req, res) => {
   }
 };
 
+// @route   DELETE /recipe/:id
+// @desc    Delete a recipe
+// @access  Public
+const deleteRecipe = async (req, res) => {
+  try {
+    const recipe = await Recipe.findByIdAndDelete(req.params.id);
+    if (!recipe) {
+      return res.status(404).json({ status: 404, message: "Recipe not found" });
+    }
+    res
+      .status(200)
+      .json({ status: 200, message: "Recipe deleted successfully" });
+  } catch (err) {
+    res.status(400).json({ status: 400, message: err.message });
+  }
+};
+
 module.exports = {
   getAllRecipes,
   getOneRecipe,
   createRecipe,
   updateRecipe,
+  deleteRecipe,
 };

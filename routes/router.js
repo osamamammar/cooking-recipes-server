@@ -3,6 +3,7 @@ const {
   getOneRecipe,
   createRecipe,
   updateRecipe,
+  deleteRecipe,
 } = require("../controllers/Recipe");
 const {
   validateCreateNewRecipe,
@@ -20,5 +21,6 @@ router.get("/recipe/:id", getOneRecipe);
 router.post("/recipes", validateCreateNewRecipe, createRecipe);
 
 router.put("/recipe/:id", validateUpdateRecipe, updateRecipe);
+router.delete("/recipe/:id", deleteRecipe);
 
 module.exports = router;
