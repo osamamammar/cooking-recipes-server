@@ -91,13 +91,18 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+// @route   POST /upload
+// @desc    Upload a dish image
+// @access  Public
 const uploadImage = async (req, res) => {
   try {
     let sampleFile;
     let uploadPath;
 
     if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send("No files were uploaded.");
+      return res
+        .status(400)
+        .send({ status: 400, message: "No image were uploaded." });
     }
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = await req.files.img;
