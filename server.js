@@ -2,6 +2,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const router = require("./routes/router");
+const RouteNotFound = require("./controllers/RouteNotFound");
 const connectDB = require("./database/db");
 
 // Create express app
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use(router);
+app.use(RouteNotFound);
 
 // Start server
 app.listen(PORT, async () => {
