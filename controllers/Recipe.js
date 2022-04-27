@@ -1,4 +1,4 @@
-const Recipe = require("../Models/Recipe");
+const Recipe = require("../models/Recipe");
 
 // @route   GET /recipes
 // @desc    Get all recipes
