@@ -8,6 +8,7 @@ const connectDB = require("./database/db");
 
 // Create express app
 const app = express();
+app.use(cors());
 
 // Load env vars
 dotenv.config();
@@ -20,7 +21,6 @@ app.use(express.static("public"));
 app.use(fileUpload());
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
