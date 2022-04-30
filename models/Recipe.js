@@ -19,8 +19,6 @@ const RecipeSchema = new mongoose.Schema({
   description: {
     type: String,
     required: false,
-    minlength: [50, "Description must be more than 50 characters"],
-    regex: [/^[a-zA-Z0-9\s,]*$/, "Description must be alphanumeric"],
   },
   dish_img: {
     type: String,
