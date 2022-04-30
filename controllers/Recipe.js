@@ -98,6 +98,7 @@ const uploadImage = async (req, res) => {
   try {
     let sampleFile;
     let uploadPath;
+    console.log(req.files);
 
     if (!req.files || Object.keys(req.files).length === 0) {
       return res
@@ -107,7 +108,6 @@ const uploadImage = async (req, res) => {
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = await req.files.img;
     uploadPath = "public/images/" + sampleFile.name;
-    console.log(uploadPath);
 
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, function (err) {
@@ -115,7 +115,7 @@ const uploadImage = async (req, res) => {
 
       res.send({
         status: 200,
-        pictureUrl: `${process.env.DOMAIN_SERVER}/images/${sampleFile.name}`,
+        pictureUrl: `/images/${sampleFile.name}`,
       });
     });
   } catch (err) {
