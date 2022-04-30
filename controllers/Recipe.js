@@ -106,7 +106,7 @@ const uploadImage = async (req, res) => {
     }
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = await req.files.img;
-    uploadPath = __dirname + "/../public/images/" + sampleFile.name;
+    uploadPath = "public/images/" + sampleFile.name;
     console.log(uploadPath);
 
     // Use the mv() method to place the file somewhere on your server
@@ -115,7 +115,7 @@ const uploadImage = async (req, res) => {
 
       res.send({
         status: 200,
-        pictureUrl: `/images/` + sampleFile.name,
+        pictureUrl: `${process.env.DOMAIN_SERVER}/images/${sampleFile.name}`,
       });
     });
   } catch (err) {
