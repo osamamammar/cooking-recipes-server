@@ -8,6 +8,7 @@ const connectDB = require("./database/db");
 
 // Create express app
 const app = express();
+app.use("/public", express.static(path(__dirname) + "/public"));
 app.use(cors());
 
 // Load env vars
