@@ -8,13 +8,21 @@ const connectDB = require("./database/db");
 
 // Create express app
 const app = express();
-app.use("/public", express.static(path(__dirname) + "/public"));
+
 app.use(
   cors({
     credentials: true,
     origin: "*",
   })
 );
+// CORS security
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 // Load env vars
 dotenv.config();
