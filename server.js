@@ -5,6 +5,7 @@ const cors = require("cors");
 const router = require("./routes/router");
 const RouteNotFound = require("./controllers/RouteNotFound");
 const connectDB = require("./database/db");
+const bodyParser = require("body-parser");
 
 // Create express app
 const app = express();
