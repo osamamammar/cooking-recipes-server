@@ -111,8 +111,7 @@ const uploadImage = async (req, res) => {
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = await req.files.img;
     uploadPath =
-      __dirname +
-      "/../public/images/" +
+      "public/images/" +
       `${uniqueName}` +
       `.${sampleFile.mimetype.split("/")[1]}`;
 
