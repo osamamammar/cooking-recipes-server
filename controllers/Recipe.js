@@ -1,4 +1,5 @@
 const Recipe = require("../models/Recipe");
+const uuidv4 = require("uuid");
 
 // @route   GET /recipes
 // @desc    Get all recipes
@@ -98,6 +99,7 @@ const uploadImage = async (req, res) => {
   try {
     let sampleFile;
     let uploadPath;
+    const uniqueName = uuidv4.v4();
     console.log(req.files);
 
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -105,9 +107,14 @@ const uploadImage = async (req, res) => {
         .status(400)
         .send({ status: 400, message: "No image were uploaded." });
     }
+
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = await req.files.img;
-    uploadPath = "public/images/" + sampleFile.name;
+    uploadPath =
+      __dirname +
+      "/../public/images/" +
+      `${uniqueName}` +
+      `.${sampleFile.mimetype.split("/")[1]}`;
 
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, function (err) {
@@ -115,7 +122,9 @@ const uploadImage = async (req, res) => {
 
       res.send({
         status: 200,
-        pictureUrl: `/images/${sampleFile.name}`,
+        pictureUrl: `/images/${uniqueName}.${
+          sampleFile.mimetype.split("/")[1]
+        }`,
       });
     });
   } catch (err) {
