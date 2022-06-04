@@ -1,4 +1,5 @@
 const Recipe = require("../models/Recipe");
+const fs = require("fs");
 const uuidv4 = require("uuid");
 
 // @route   GET /recipes
@@ -81,6 +82,15 @@ const deleteRecipe = async (req, res) => {
   try {
     const recipe = await Recipe.findByIdAndDelete(req.params.id);
 
+    // delete image from the server
+    console.log(recipe.dish_img);
+    const imagePath = __dirname + `/../public` + recipe.dish_img;
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
     if (!recipe) {
       return res.status(404).json({ status: 404, message: "Recipe not found" });
     }
@@ -116,8 +126,16 @@ const uploadImage = async (req, res) => {
       `.${sampleFile.mimetype.split("/")[1]}`;
 
     // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv(uploadPath, function (err) {
+    sampleFile.mv(uploadPath, async function (err) {
       if (err) return res.status(500).send(err);
+
+      // set image url to the recipe
+      const recipe = await Recipe.findById(req.params.recipeId);
+
+      recipe.dish_img = `/images/${uniqueName}.${
+        sampleFile.mimetype.split("/")[1]
+      }`;
+      await recipe.save();
 
       res.send({
         status: 200,

@@ -73,12 +73,12 @@ To run this project, you will need to add the following environment variables to
 #### Upload image
 
 ```http
-  POST /upload
+  POST /upload/:recipeId
 ```
 
 | route        | desc      | access                |
 | :-------- | :------- | :------------------------- |
-| ` POST /upload` | `Upload a dish image` | Public |
+| ` POST /upload/:recipeId` | `Upload a dish image` | Public |
 
 
 #### Update a recipe

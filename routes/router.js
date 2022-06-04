@@ -37,7 +37,7 @@ router.post("/recipes", validateRequiredSchema, createRecipe);
 // @route   POST /upload
 // @desc    Upload a dish image
 // @access  Public
-router.post("/upload", uploadImage);
+router.post("/upload/:recipeId", uploadImage);
 
 // @route   PUT /recipe/:id
 // @desc    Update a recipe

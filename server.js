@@ -16,6 +16,7 @@ app.use(
     origin: "*",
   })
 );
+
 // CORS security
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", true);
